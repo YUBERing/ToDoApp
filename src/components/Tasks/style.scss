@@ -1,0 +1,31 @@
+.App {
+    display: flex;
+    text-align: center;
+  }
+  
+  .toDoList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .categories {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px 10px 0px;
+  }
+  
+  .place__addToDo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .calendar__day {
+    background-color: #44eb60;
+  }
+  
+  
+  

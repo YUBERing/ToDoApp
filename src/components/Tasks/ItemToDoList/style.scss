@@ -1,0 +1,39 @@
+.todoitem {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+}
+
+.todotask {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-right: 10px;
+}
+
+.headings {
+        display: flex;
+        width: 100%;
+}
+
+.description {
+        display: flex;
+        word-wrap: break-word;
+        word-break: break-all;
+        width: 100%;
+}
+
+.date {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+}
+
+.buttons {
+        display: flex;
+        align-items: center;
+        
+        :nth-child(2){
+                margin-right: 10px;
+        }
+}
