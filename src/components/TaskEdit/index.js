@@ -53,7 +53,7 @@ function TaskEdit(props) {
                         />
                         : <Button
                             label = {'Изменить'}
-                            onClick = {() => {onModify(form, data.index)}}
+                            onClick = {() => {onModify(form, data)}}
                             className = {'submit'}
                         />
                     }

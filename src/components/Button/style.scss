@@ -1,10 +1,18 @@
-.addToDo {
-    border: 2px solid gray;
+  .addToDo {
+    height: 60px;
+    width: 60px;
     cursor: pointer;
+    border: none;
+    background-color: #dcf2ea;
+    border-radius: 10px;
+    svg{
+      color: #1f634a;
+    }
   }
   
   .submit {
     border: 1px solid black;
+    border-radius: 5px;
     cursor: pointer;
   }
   

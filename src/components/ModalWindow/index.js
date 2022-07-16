@@ -1,6 +1,6 @@
 import {React} from 'react';
 
-import Header from '../Header/index';
+import ModalWindowHeader from './Header/index';
 
 import './style.scss';
 
@@ -15,7 +15,7 @@ function ModalWindow(props) {
     return(
         <div className='modalBack'>
             <div className='modalFront'>
-                <Header
+                <ModalWindowHeader
                     headname = {'Задача'}
                     onClose = {onClose}
                 />

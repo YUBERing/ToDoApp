@@ -1,0 +1,39 @@
+.viewedTasks {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: calc(100% - 50px);
+}
+
+.selection_addition_block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 150px;
+  width: auto;
+}
+
+.viewedToDoList {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: #dcf2ea;
+  border-radius: 10px;
+  padding: 10px;
+  height: 100%;
+  max-height: calc(100% - 150px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    background-color: #dcf2ea;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background-color: #008c59;
+    border-radius: 10px;
+  }
+}

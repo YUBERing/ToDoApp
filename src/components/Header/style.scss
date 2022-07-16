@@ -1,19 +1,24 @@
-.header {
+  header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  
-  .header div:first-child {
-    font-size: 36px;
-  }
-  
-  .header div:last-child {
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    cursor: pointer;
+    margin: 0px 0px 10px 0px;
+    width: auto;
+
+    @media screen and (max-width: 767px) and (min-width: 320px) {
+      width: calc(100% - 70px);
+      margin-right: 10px;
+    }
+  }
+
+  .categories {
+    display: flex;
+    justify-content: center;
+    margin: 0px 0px 10px 0px;
+
+    @media screen and (max-width: 767px) and (min-width: 320px) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      width: 100%;
+    }
   }

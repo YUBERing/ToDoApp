@@ -1,4 +1,9 @@
-import { TODOS_UPDATE_TASK_LIST } from "../../actions/todos"
+import {
+  TODOS_CHOSEN_TASK_LIST,
+  TODOS_DELETE_TASK_LIST,
+  TODOS_MODIFY_TASK_LIST,
+  TODOS_UPDATE_TASK_LIST
+} from "../../actions/todos"
 
 const initialState = {todos: []};
 
@@ -13,6 +18,39 @@ export default function todosReducer(state = initialState, action) {
       return {
         ...state,
         todos: action.payload,
+      }
+    }
+    case TODOS_DELETE_TASK_LIST: {
+      return {
+        ...state,
+        todos: state.todos.filter((item, index) => index !== action.payload
+        )
+      }
+    }
+    case TODOS_MODIFY_TASK_LIST: {
+      return {
+        ...state,
+        todos: state.todos.map((item, index) => {
+          if (index === action.payload.index) {
+            return action.payload.form
+          }
+
+          return item
+        })
+      }
+    }
+    case TODOS_CHOSEN_TASK_LIST: {
+      return {
+        ...state,
+        todos: state.todos.map((item, index) => {
+          if (index === action.payload) {
+            item.chosen = !item.chosen
+
+            return item
+          }
+
+          return item
+        })
       }
     }
     case 'todos/todoAdded': {

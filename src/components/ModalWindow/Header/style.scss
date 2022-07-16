@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    div:first-child {
+      font-size: 30px;
+    }
+
+    svg{
+      cursor: pointer;
+      color: #1f634a;
+    }
+  }
+

@@ -1,22 +1,25 @@
-.App {
+  .App {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    box-sizing: border-box;
+    height: auto;
+    width: 75%;
+    padding: 20px 20px 20px 0px;
+    @media screen and (max-width: 1599px) and (min-width: 320px) {
+      width: calc(100% - 51px);
+    }
   }
   
   .toDoList {
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
     width: 100%;
-    margin-left: 10px;
-    margin-right: 10px;
   }
-  
-  .categories {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0px 10px 0px;
-  }
-  
+
   .place__addToDo {
     display: flex;
     width: 100%;
@@ -24,8 +27,14 @@
   }
 
   .calendar__day {
-    background-color: #44eb60;
+    background-color: #76c4a8;
   }
+
+
+
+
+
+
   
   
   
