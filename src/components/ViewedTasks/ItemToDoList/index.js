@@ -16,7 +16,7 @@ function ItemToDoList(props) {
         onDeleteItem,
         onChangeItem,
         onChecked,
-    } = props;
+    } = props
 
     const date = new Date(Date.parse(item.date)).toLocaleDateString();
 
@@ -27,7 +27,7 @@ function ItemToDoList(props) {
     }
 
     return (
-        <div className='todoitem' key={item.id}>
+        <div className={'todoitem'}  key={item.id}>
             <div className='todotask'>
                 <div className='headings' onClick={() => {onClickToReveal()}}>
                     <div className={open ? 'rotate' : undefined}><ArrowForwardIosIcon sx={{fontSize: 20}}/></div>

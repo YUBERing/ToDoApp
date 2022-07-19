@@ -7,9 +7,11 @@ import TaskEdit from "../TaskEdit";
 import ItemToDoList from "./ItemToDoList";
 import {chosenToDoItem, deleteToDoItem, modifyToDoItem, updateToDoList} from "../../store/actionCreators/todos";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import green from "@mui/material/colors/green";
+import {List, AutoSizer} from "react-virtualized";
 
 import './style.scss'
+import 'react-virtualized/styles.css';
+
 
 function ViewedTasks(props) {
     const {
@@ -104,17 +106,15 @@ function ViewedTasks(props) {
         setData(null);
     }
 
-    const getToDoList = () => {
-        return todos.todos.map((item) => {
+    const getToDoList = ({index}) => {
             return (
                 <ItemToDoList
-                    item={item}
+                    item={todos.todos[index]}
                     onDeleteItem={onDeleteCard}
                     onChangeItem={onChangeCard}
                     onChecked={onChecked}
                 />
             )
-        })
     }
 
     return (
@@ -132,7 +132,17 @@ function ViewedTasks(props) {
                 }
             </div>
             <div className='viewedToDoList'>
-                {getToDoList()}
+                <AutoSizer>
+                    {({height, width}) => (
+                    <List
+                        width={width}
+                        height={height}
+                        rowCount={todos.todos.length}
+                        rowHeight={50}
+                        rowRenderer={getToDoList}
+                    />
+                    )}
+                </AutoSizer>
             </div>
             <div className='place__addToDo'>
                 {
