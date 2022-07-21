@@ -3,7 +3,6 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './reducer'
 
-
 const composedEnhancer = composeWithDevTools(
   // Add whatever middleware you actually want to use here
   applyMiddleware()
@@ -11,4 +10,5 @@ const composedEnhancer = composeWithDevTools(
 )
 
 const store = createStore(rootReducer, composedEnhancer)
+
 export default store

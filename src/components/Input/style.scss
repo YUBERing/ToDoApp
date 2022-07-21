@@ -1,14 +1,4 @@
-.headingPlace {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-  
-  .headingPlace div {
-    font-size: 24px;
-  }
-  
-  .headingPlace input {
-    width: 80%;
-  }
+input{
+  min-height: 40px;
+  font-size: 20px;
+}

@@ -6,17 +6,19 @@ function Input(props) {
     const {
         label,
         value,
-        onChange
+        name,
+        className,
+        onChange,
     } = props;
 
     return (
-        <div className='headingPlace'>
-            <div>{label}</div>
+        <div className={className}>
+            {label}
             <input
             required
             type='text'
             value={value}
-            onChange={(event) => {onChange(event.target.value, 'heading')}}
+            onChange={(event) => {onChange(event.target.value, name)}}
             />
         </div>
     )

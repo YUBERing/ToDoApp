@@ -1,14 +1,18 @@
 import React, {useDeferredValue, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {updateToDoList} from "../../store/actionCreators/todos";
+
 import SearchIcon from '@mui/icons-material/Search';
+
+import {updateToDoList} from "../../store/actionCreators/todos";
+
 import './style.scss'
-import grey from "@mui/material/colors/grey";
+import Input from "../Input";
+import {findTasksAccordingPage} from "../../utils/findTasksAccordingPage";
 
 function SearchBar(props) {
     const {
         regularPage
-    } = props
+    } = props;
 
     const [text, setText] = useState('');
 
@@ -17,30 +21,25 @@ function SearchBar(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let toDoList = JSON.parse(localStorage.todoArr);
-
-        if (!regularPage) {
-            toDoList = toDoList.filter(item => item.chosen === true)
-        }
+        let toDoList = findTasksAccordingPage(regularPage);
 
         if (deferredText) {
             toDoList = toDoList.filter(
-                item => item.heading.indexOf(deferredText) !== -1
-            )
+                item => item.heading.includes(deferredText)
+            );
         }
 
-        dispatch(updateToDoList(toDoList))
-    }, [deferredText])
+        dispatch(updateToDoList(toDoList));
+    }, [deferredText]);
 
     return (
-        <div className={'search_bar'}>
-            <SearchIcon sx={{fontSize: 30, color: grey[500]}}/>
-            <input
+            <Input
+                label={<SearchIcon/>}
                 value={text}
-                onChange={(event) => {setText(event.target.value)}}
+                className={'search-bar'}
+                onChange={setText}
             />
-        </div>
-    )
+    );
 }
 
-export default SearchBar
+export default SearchBar;

@@ -10,12 +10,13 @@ import './style.scss';
 import yellow from "@mui/material/colors/yellow";
 
 
-function ItemToDoList(props) {
+function ViewedTasksItemToDoList(props) {
     const {
         item,
+        className,
         onDeleteItem,
         onChangeItem,
-        onChecked,
+        onCheck,
     } = props
 
     const date = new Date(Date.parse(item.date)).toLocaleDateString();
@@ -27,10 +28,10 @@ function ItemToDoList(props) {
     }
 
     return (
-        <div className={'todoitem'}  key={item.id}>
-            <div className='todotask'>
+        <div className={className}  key={item.id}>
+            <div className='to-do-task'>
                 <div className='headings' onClick={() => {onClickToReveal()}}>
-                    <div className={open ? 'rotate' : undefined}><ArrowForwardIosIcon sx={{fontSize: 20}}/></div>
+                    <div className={open ? 'headings__arrow headings__arrow_open' : 'headings__arrow'}><ArrowForwardIosIcon sx={{fontSize: 20}}/></div>
                     {item.heading}
                 </div>
                 <div className='date'>
@@ -38,21 +39,21 @@ function ItemToDoList(props) {
                 </div>
                 <div className={'favorite'}>
                     {
-                        item.chosen
-                            ? <StarIcon sx={{color: yellow[500], fontSize: 30}} onClick={() => onChecked(item)}/>
-                            : <StarBorderIcon sx={{color: yellow[800], fontSize: 30}} onClick={() => onChecked(item)}/>
+                        item.favorite
+                            ? <StarIcon sx={{color: yellow[500]}} onClick={() => onCheck(item)}/>
+                            : <StarBorderIcon sx={{color: yellow[800]}} onClick={() => onCheck(item)}/>
                     }
                 </div>
                 <div className='buttons'>
-                    <EditIcon sx={{fontSize: 30}} onClick={() => {onChangeItem(item)}}/>
-                    <DeleteIcon sx={{fontSize: 30}} onClick={() => {onDeleteItem(item)}}/>
+                    <EditIcon onClick={() => {onChangeItem(item)}}/>
+                    <DeleteIcon onClick={() => {onDeleteItem(item)}}/>
                 </div>
             </div>
-            <div className={open ? 'description open' : 'description'}>
+            <div className={open ? 'description description_open' : 'description'}>
                 {item.description}
             </div>
         </div>
     )
 }
 
-export default ItemToDoList;
+export default ViewedTasksItemToDoList;

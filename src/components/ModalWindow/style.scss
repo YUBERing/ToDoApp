@@ -1,5 +1,8 @@
-.modalBack{
-    position: fixed;
+.modal-window {
+  position: fixed;
+}
+
+.modal-window_back{
     background: rgba(0, 0, 0, 0.3);
     z-index: 1000;
     left: 0;
@@ -12,10 +15,10 @@
     align-items: center;
   }
   
-  .modalFront{
-    position: fixed;
+  .modal-window_front{
     background-color: white;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     height: auto;
     z-index: 99999;
     margin:auto;
@@ -28,10 +31,6 @@
     }
   }
 
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+
   
   

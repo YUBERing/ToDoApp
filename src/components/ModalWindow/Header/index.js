@@ -6,14 +6,15 @@ import './style.scss';
 
 function ModalWindowHeader(props) {
     const {
-        headname,
-        onClose
+        headName,
+        onClose,
+        className
     } = props
 
 
     return (
-        <div className='header'>
-            <div>{headname}</div>
+        <div className={className}>
+            <div>{headName}</div>
             <CloseIcon onClick={onClose}/>
         </div>
     )

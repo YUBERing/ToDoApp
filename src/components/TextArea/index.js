@@ -6,19 +6,23 @@ function TextArea(props){
     const {
         label,
         value,
+        cols,
+        rows,
+        name,
+        className,
         onChange
     } = props;
 
     return (
-        <div className='discriptionPlace'>
-            <div>{label}</div>
+        <div className={className}>
+            {label}
             <textarea
                 required
                 name=''
-                cols={60}
-                rows={12}
+                cols={cols}
+                rows={rows}
                 value={value}
-                onChange={(event) => {onChange(event.target.value, 'description')}}
+                onChange={(event) => {onChange(event.target.value, name)}}
             />
         </div>
     )

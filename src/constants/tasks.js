@@ -10,4 +10,4 @@ export const CATEGORY_LIST = [
     {label: 'Вчера', type: CATEGORY_TYPE.YESTERDAY},
     {label: 'Сегодня', type: CATEGORY_TYPE.TODAY},
     {label: 'За месяц', type: CATEGORY_TYPE.FOR_MONTH},
-    ];
+];

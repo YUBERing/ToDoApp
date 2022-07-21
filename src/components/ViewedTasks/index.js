@@ -4,18 +4,21 @@ import {useDispatch, useSelector} from "react-redux";
 import Header from "../Header";
 import Button from "../Button";
 import TaskEdit from "../TaskEdit";
-import ItemToDoList from "./ItemToDoList";
-import {chosenToDoItem, deleteToDoItem, modifyToDoItem, updateToDoList} from "../../store/actionCreators/todos";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import ViewedTasksItemToDoList from "./ItemToDoList";
 import {List, AutoSizer} from "react-virtualized";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+
+import {sortByDate} from "../../utils/array";
+
+import {chosenToDoItem, deleteToDoItem, modifyToDoItem, updateToDoList} from "../../store/actionCreators/todos";
 
 import './style.scss'
 import 'react-virtualized/styles.css';
 
 
+
 function ViewedTasks(props) {
     const {
-        selectTask,
         regularPage,
     } = props
 
@@ -44,12 +47,12 @@ function ViewedTasks(props) {
         setData({ ...item, index });
     }
 
-    const onChecked = (element) => {
+    const onCheck = (element) => {
         const toDoList = JSON.parse(localStorage.todoArr);
 
         const indexLocalStorage = toDoList.findIndex(item => item.id === element.id)
 
-        toDoList[indexLocalStorage].chosen = !toDoList[indexLocalStorage].chosen;
+        toDoList[indexLocalStorage].favorite = !toDoList[indexLocalStorage].favorite;
         localStorage.todoArr = JSON.stringify(toDoList);
         const indexTodos = todos.todos.findIndex(item => item.id === element.id)
 
@@ -69,15 +72,8 @@ function ViewedTasks(props) {
         const todoList = [...JSON.parse(localStorage.todoArr), form];
 
         setOpen(!isOpen);
-        todoList.sort((firstItem, secondItem) => {
-            const a = new Date(Date.parse(firstItem.date))
+        sortByDate(todoList);
 
-            const b = new Date(Date.parse(secondItem.date))
-
-            if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
-        })
         localStorage.todoArr = JSON.stringify(todoList)
         dispatch(updateToDoList(JSON.parse(localStorage.todoArr)));
     }
@@ -88,15 +84,7 @@ function ViewedTasks(props) {
         const indexLocalStorage = toDoList.findIndex(item => item.id === element.id)
 
         toDoList[indexLocalStorage] = form;
-        toDoList.sort((firstItem, secondItem) => {
-            const a = new Date(Date.parse(firstItem.date))
-
-            const b = new Date(Date.parse(secondItem.date))
-
-            if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
-        })
+        sortByDate(toDoList);
 
         localStorage.todoArr = JSON.stringify(toDoList);
         const indexTodos = todos.todos.findIndex(item => item.id === element.id)
@@ -108,43 +96,43 @@ function ViewedTasks(props) {
 
     const getToDoList = ({index}) => {
             return (
-                <ItemToDoList
+                <ViewedTasksItemToDoList
                     item={todos.todos[index]}
+                    className={'viewed-tasks__item-to-do-list'}
                     onDeleteItem={onDeleteCard}
                     onChangeItem={onChangeCard}
-                    onChecked={onChecked}
+                    onCheck={onCheck}
                 />
             )
     }
 
     return (
-        <div className='viewedTasks'>
-            <div className={'selection_addition_block'}>
-                <Header funcSelectTask={selectTask} regularPage={regularPage}/>
+        <div className='viewed-tasks'>
+            <div className={'viewed-tasks__header'}>
+                <Header regularPage={regularPage}/>
                 {
                     regularPage &&
-
                     <Button
                         label={<AddCircleOutlineIcon sx={{fontSize: 50}}/>}
                         onClick={onClick}
-                        className={'addToDo'}
+                        className={'add-to-do'}
                     />
                 }
             </div>
-            <div className='viewedToDoList'>
+            <div className='viewed-tasks__to-do-list'>
                 <AutoSizer>
                     {({height, width}) => (
                     <List
                         width={width}
                         height={height}
                         rowCount={todos.todos.length}
-                        rowHeight={50}
+                        rowHeight={60}
                         rowRenderer={getToDoList}
                     />
                     )}
                 </AutoSizer>
             </div>
-            <div className='place__addToDo'>
+            <div className='viewed-tasks__modal-window-place'>
                 {
                     isOpen &&
                     <TaskEdit

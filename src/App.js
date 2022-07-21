@@ -1,8 +1,7 @@
 import {React} from 'react';
-import 'react-calendar/dist/Calendar.css';
+import {Routes, Route} from "react-router-dom";
 
 import Tasks from './components/Tasks/index';
-import {Routes, Route} from "react-router-dom";
 import FavoriteTasks from "./components/FavoriteTasks";
 import SideBar from "./components/SideBar";
 

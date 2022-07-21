@@ -1,20 +1,27 @@
-.calendar{
+.calendar-menu__calendar{
   display: none;
   position: absolute;
-  width: 250px;
 
+  .calendar_day {
+    background-color: #76c4a8;
+  }
+
+  @media screen and (max-width: 767px) and (min-width: 320px) {
+    width: 250px;
+  }
 }
 
-.calendar_menu{
+.calendar-menu{
   width: 50px;
   height: 50px;
   margin-bottom: 10px;
+
   svg{
     cursor:pointer;
     color:#1f634a;
   }
 
-  &:hover .calendar{
+  &:hover .calendar-menu__calendar{
     display: block;
     position: absolute;
     z-index: 1;

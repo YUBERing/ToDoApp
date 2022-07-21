@@ -1,4 +1,4 @@
-.viewedTasks {
+.viewed-tasks {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -7,7 +7,7 @@
   max-height: calc(100% - 50px);
 }
 
-.selection_addition_block {
+.viewed-tasks__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +15,7 @@
   width: auto;
 }
 
-.viewedToDoList {
+.viewed-tasks__to-do-list {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -33,5 +33,42 @@
   &::-webkit-scrollbar-thumb{
     background-color: #008c59;
     border-radius: 10px;
+  }
+}
+
+.viewed-tasks__modal-window-place {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.add-to-do {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+  border: none;
+  background-color: #dcf2ea;
+  border-radius: 10px;
+  svg{
+    color: #1f634a;
+  }
+}
+
+.viewed-tasks__item-to-do-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 40px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  background-color: #b8ded0;
+  border-radius: 10px;
+  padding: 5px 10px;
+  height: auto;
+  box-sizing: border-box;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
   }
 }

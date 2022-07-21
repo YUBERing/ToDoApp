@@ -44,7 +44,7 @@ export default function todosReducer(state = initialState, action) {
         ...state,
         todos: state.todos.map((item, index) => {
           if (index === action.payload) {
-            item.chosen = !item.chosen
+            item.favorite = !item.favorite
 
             return item
           }

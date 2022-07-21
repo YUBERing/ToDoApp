@@ -4,8 +4,6 @@ import ModalWindowHeader from './Header/index';
 
 import './style.scss';
 
-
-
 function ModalWindow(props) {
     const {
         onClose,
@@ -13,11 +11,12 @@ function ModalWindow(props) {
     } = props;
 
     return(
-        <div className='modalBack'>
-            <div className='modalFront'>
+        <div className='modal-window modal-window_back'>
+            <div className='modal-window modal-window_front'>
                 <ModalWindowHeader
-                    headname = {'Задача'}
+                    headName = {'Задача'}
                     onClose = {onClose}
+                    className={'modal-window__header'}
                 />
                 {children}
             </div>

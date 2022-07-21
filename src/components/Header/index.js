@@ -1,42 +1,39 @@
 import React from "react";
 
 import TasksCategory from "./Category";
+import SearchBar from "../SearchBar";
 
 import {CATEGORY_LIST} from "../../constants/tasks";
 
 import './style.scss'
-import SearchBar from "../SearchBar";
 
 function Header(props) {
 
     const {
-        funcSelectTask,
         regularPage,
     } = props;
 
-    const getCategory = () => {
+    const getCategories = () => {
         return CATEGORY_LIST.map((item, i) => {
             return (
                 <TasksCategory
                     label={item.label}
+                    className={'categories__point'}
                     type={item.type}
-                    selectTask={funcSelectTask}
+                    regularPage={regularPage}
                 />
             );
         })
     }
 
     return (
-        <>
-            <header>
-                <div className='categories'>
-                    {getCategory()}
-                </div>
-                <SearchBar regularPage={regularPage}/>
-            </header>
-        </>
-
-    )
+        <header>
+            <div className='categories'>
+                {getCategories()}
+            </div>
+            <SearchBar regularPage={regularPage}/>
+        </header>
+    );
 }
 
 export default Header;

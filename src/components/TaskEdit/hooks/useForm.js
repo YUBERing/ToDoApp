@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+
 import {nanoid} from "nanoid";
 
 export const useTaskEditForm = ({data}) => {
-    const [form, setForm] = useState({id: nanoid(),heading: '', description: '', date: '', chosen: false});
+    const [form, setForm] = useState({id: nanoid(),heading: '', description: '', date: '', favorite: false});
 
     useEffect(() => {
         if (!data) {

@@ -1,14 +1,16 @@
-.header {
+.modal-window__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 
     div:first-child {
       font-size: 30px;
     }
 
     svg{
+      min-height: 40px;
+      min-width: 40px;
       cursor: pointer;
       color: #1f634a;
     }

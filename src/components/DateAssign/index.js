@@ -1,8 +1,10 @@
-import {React, useState} from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import {forwardRef, React} from 'react'
 
+import DatePicker from 'react-datepicker'
+
+import 'react-datepicker/dist/react-datepicker.css'
 import './style.scss';
+import Button from "../Button";
 
 function DateAssign(props) {
     const {
@@ -11,13 +13,24 @@ function DateAssign(props) {
         onChange
     } = props;
 
+    const CustomInput = forwardRef(
+        ({value, onClick}, ref) => (
+          <input
+            value={value}
+            onClick={onClick}
+            className={'custom-input'}
+            ref={ref}
+          />
+        ));
+
     return (
-        <div className='datePlace'>
-            <div>{label}</div>
+        <div className='date-place'>
+            {label}
             <DatePicker
                 dateFormat='dd.MM.yyyy'
                 selected={Date.parse(value)}
                 onChange={(date) => {onChange(date, 'date')}}
+                customInput={<CustomInput/>}
             />
         </div>
     )
