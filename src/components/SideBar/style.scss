@@ -1,11 +1,14 @@
-.side-bar__menu {
+.side-bar {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 25%;
   height: auto;
   background-color: white;
   box-sizing: border-box;
   padding: 50px 0px 0px 50px;
+  margin-right: 20px;
+  border-right: 1px solid gray;
+  box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.2);
 
   div:first-child:not(.link) {
     margin-bottom: 100px;
@@ -16,30 +19,36 @@
     display: none;
     position: absolute;
     width: 300px;
-    height: 100%;
-    padding: 50px 0px 0px 20px;
-    box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    padding: 50px 0px 50px 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
     border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
     left: 30px;
+    margin: 0px;
   }
 
   @media screen and (max-width: 767px) and (min-width: 320px) {
     display: none;
     position: absolute;
+    margin: 0px;
     width: 200px;
-    height: 100%;
-    padding: 50px 0px 0px 0px;
-    box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    padding: 50px 0px 50px 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
     border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
     left: 30px;
   }
 }
 
-.navigation {
+.side-bar__navigation {
   display: flex;
   flex-direction: column;
 
-  .navigation__link {
+  .link {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -56,46 +65,9 @@
     }
   }
 
-  .navigation__link_active {
+  .link_active {
     color: rgba(0, 0, 0, 1);
     border-right: 5px solid #1f634a;
 
-  }
-}
-
-
-
-.side-bar {
-  display: flex;
-  width: 25%;
-  height: auto;
-  margin-right: 20px;
-  border-right: 1px solid gray;
-  z-index: 1;
-  box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-
-  .side-bar__button{
-    display: none;
-    background-color: white;
-    width: 30px;
-
-    @media screen and (max-width: 1599px) and (min-width: 320px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      svg{
-        transform: rotate(90deg);
-      }
-
-    }
-  }
-
-  @media screen and (max-width: 1599px) and (min-width: 320px) {
-    width: 30px;
-
-    &:hover .side-bar__menu{
-      display: flex;
-    }
   }
 }

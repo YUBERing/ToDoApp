@@ -9,7 +9,7 @@ const Label = (props) => {
     } = props;
 
     return (
-        <div className={'label'}>
+        <div className={className}>
             {content}
         </div>
     );

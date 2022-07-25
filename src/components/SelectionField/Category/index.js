@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 
-import {findTasksAccordingPage} from "../../../utils/findTasksAccordingPage";
+import {findTasksForPage} from "../../../utils/findTasksForPage";
 
 import {updateToDoList} from "../../../store/actionCreators/todos";
 
@@ -10,12 +10,12 @@ import {CATEGORY_TYPE} from "../../../constants/tasks";
 import './style.scss';
 
 
-function TasksCategory(props) {
+function SelectionFieldCategory(props) {
     const {
         label,
         className,
         type,
-        regularPage,
+        isRegularPage,
     } = props;
 
     const dispatch = useDispatch();
@@ -29,22 +29,22 @@ function TasksCategory(props) {
 
         switch(type) {
             case CATEGORY_TYPE.ALL:
-                dispatch(updateToDoList(findTasksAccordingPage(regularPage)));
+                dispatch(updateToDoList(findTasksForPage(isRegularPage)));
 
                 break;
             case CATEGORY_TYPE.YESTERDAY:
                 const yesterday = new Date(nowDay.setDate(nowDay.getDate() - 1)).toLocaleDateString();
 
-                const yesterdayTasks = findTasksAccordingPage(regularPage).filter(
+                const yesterdayTasks = findTasksForPage(isRegularPage).filter(
                     item => new Date(Date.parse(item.date)).toLocaleDateString() === yesterday
                 );
 
                 dispatch(updateToDoList(yesterdayTasks));
                 break;
             case CATEGORY_TYPE.TODAY:
-                const nowDayTasks = findTasksAccordingPage(regularPage).filter(
+                const nowDayTasks = findTasksForPage(isRegularPage).filter(
                     item => new Date(Date.parse(item.date)).toLocaleDateString() === nowDay.toLocaleDateString()
-                )
+                );
 
                 dispatch(updateToDoList(nowDayTasks));
                 break;
@@ -53,19 +53,25 @@ function TasksCategory(props) {
 
                 const nowYear = new Date().getFullYear();
 
-                const nowMonthTasks = findTasksAccordingPage(regularPage).filter(
+                const nowMonthTasks = findTasksForPage(isRegularPage).filter(
                     item => new Date(Date.parse(item.date)).getMonth() === nowMonth && new Date(Date.parse(item.date)).getFullYear() === nowYear
-                )
+                );
+
                 dispatch(updateToDoList(nowMonthTasks));
+                break;
+            default:
                 break;
         }
     }
 
     return (
-        <div className={className} key={type} onClick = {() => {selectTask(type)}}>
+        <div
+            className={className}
+            onClick = {() => {selectTask(type)}}
+        >
             {label}
         </div>
     )
 }
 
-export default TasksCategory;
+export default SelectionFieldCategory;

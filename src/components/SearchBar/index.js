@@ -2,16 +2,17 @@ import React, {useDeferredValue, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 
 import SearchIcon from '@mui/icons-material/Search';
+import Input from "../Input";
+
+import {findTasksForPage} from "../../utils/findTasksForPage";
 
 import {updateToDoList} from "../../store/actionCreators/todos";
 
 import './style.scss'
-import Input from "../Input";
-import {findTasksAccordingPage} from "../../utils/findTasksAccordingPage";
 
 function SearchBar(props) {
     const {
-        regularPage
+        isRegularPage
     } = props;
 
     const [text, setText] = useState('');
@@ -21,7 +22,7 @@ function SearchBar(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let toDoList = findTasksAccordingPage(regularPage);
+        let toDoList = findTasksForPage(isRegularPage);
 
         if (deferredText) {
             toDoList = toDoList.filter(

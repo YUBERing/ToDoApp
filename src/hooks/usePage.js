@@ -1,18 +1,35 @@
 import {useDispatch} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
-import {findTasksAccordingPage} from "../utils/findTasksAccordingPage";
+import {findTasksForPage} from "../utils/findTasksForPage";
 
 import {updateToDoList} from "../store/actionCreators/todos";
 
-export const useTasksEditPage = ({regularPage}) => {
+export const useTasksEditPage = (isRegularPage) => {
+    const [isOpen, setOpen] = useState(false);
+
+    const [data, setData] = useState(null);
+
     const dispatch = useDispatch();
+
+    function onClick() {
+        setOpen(!isOpen);
+
+    }
 
     useEffect(() => {
         if (!localStorage.todoArr) {
             localStorage.todoArr = JSON.stringify([]);
         }
 
-        dispatch(updateToDoList(findTasksAccordingPage(regularPage)));
+        dispatch(updateToDoList(findTasksForPage(isRegularPage)));
     });
+
+    return {
+        isOpen,
+        setOpen,
+        data,
+        setData,
+        onClick,
+    }
 }

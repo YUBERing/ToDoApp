@@ -1,28 +1,35 @@
 import {React} from 'react';
 
+import Label from "../Label";
+
 import './style.scss';
 
 function TextArea(props){
     const {
         label,
         value,
-        cols,
-        rows,
         name,
         className,
-        onChange
+        onChange,
+        onKeyPress,
+        errorMessage,
     } = props;
 
     return (
         <div className={className}>
-            {label}
+            <Label
+                content={label}
+                className={'label'}
+            />
             <textarea
-                required
-                name=''
-                cols={cols}
-                rows={rows}
+                name={name}
                 value={value}
                 onChange={(event) => {onChange(event.target.value, name)}}
+                onKeyDown={onKeyPress}
+            />
+            <Label
+                content={errorMessage}
+                className={'error-message'}
             />
         </div>
     )

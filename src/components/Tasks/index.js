@@ -1,25 +1,39 @@
 import React from 'react';
 
 import ViewedTasks from "../ViewedTasks";
-import CalendarMenu from "../CalendarMenu";
+import Header from "../Header";
+
+import {useTasksEditPage} from "../../hooks/usePage";
 
 import './style.scss';
 import 'react-calendar/dist/Calendar.css';
-import {useTasksEditPage} from "../../hooks/usePage";
-
 
 function Tasks() {
-  const regularPage = true;
+  const isRegularPage = true;
 
-  useTasksEditPage({regularPage});
+  const {
+      isOpen,
+      setOpen,
+      data,
+      setData,
+      onClick,
+  } = useTasksEditPage(isRegularPage);
 
   return (
     <div className="tasks">
       <div className='tasks__to-do-list'>
-        <CalendarMenu
-          regularPage={regularPage}
+        <Header
+            isRegularPage={isRegularPage}
+            onClick={onClick}
         />
-        <ViewedTasks regularPage={regularPage}/>
+        <ViewedTasks
+            isRegularPage={isRegularPage}
+            data={data}
+            setData={setData}
+            isOpen={isOpen}
+            setOpen={setOpen}
+            onClick={onClick}
+        />
       </div>
     </div>
   );

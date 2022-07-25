@@ -5,12 +5,10 @@ import Input from '../Input';
 import TextArea from '../TextArea';
 import DateAssign from '../DateAssign';
 import Button from '../Button';
-import Label from "../Label";
 
 import { useTaskEditForm } from './hooks/useForm';
 
 import './style.scss';
-
 
 function TaskEdit(props) {
     const {
@@ -21,52 +19,67 @@ function TaskEdit(props) {
     } = props;
 
     const {
+        isValidInput,
+        errorMessages,
         form,
+        ref,
         onChange,
+        onEnterPress,
     } = useTaskEditForm({data});
 
     return (
         <ModalWindow
             onClose = {onClose}
         >
-            <form>
+            <form className={'task-edit'}>
                 <Input
-                    label = {<Label
-                        content={'Заголовок'}
-                    />}
-                    value = {form.heading}
+                    label={'Заголовок'}
+                    value={form.heading}
                     name={'heading'}
-                    className={'task-edit__input'}
-                    onChange = {onChange}
+                    className={isValidInput.heading
+                        ? 'input'
+                        : 'input input_invalid'}
+                    onChange={onChange}
+                    onKeyPress={onEnterPress}
+                    errorMessage={errorMessages.heading}
                 />
                 <TextArea
-                    label = {<Label
-                        content={'Описание'}
-                    />}
-                    value = {form.description}
+                    label={'Описание'}
+                    value={form.description}
                     name={'description'}
-                    className={'task-edit__textarea'}
-                    onChange = {onChange}
+                    className={isValidInput.description
+                        ? 'textarea'
+                        : 'textarea textarea_invalid'}
+                    onChange={onChange}
+                    onKeyPress={onEnterPress}
+                    errorMessage={errorMessages.description}
                 />
                 <div className='task-edit__footer'>
                     <DateAssign
-                        label = {<Label
-                            content={'Дата задачи'}
-                        />}
+                        name={'date'}
+                        label = {'Дата задачи'}
                         value = {form.date}
                         onChange = {onChange}
                     />
                     {
                         !data
                         ? <Button
-                            label = {'Добавить'}
-                            onClick = {() => {onSubmit(form)}}
-                            className = {'submit'}
+                            label={'Добавить'}
+                            onClick={() => {onSubmit(form)}}
+                            className={(isValidInput.heading && isValidInput.description)
+                                ? 'button button_submit'
+                                : 'button button_submit button_disabled'}
+                            disabled={!(isValidInput.heading && isValidInput.description)}
+                            ref={ref}
                         />
                         : <Button
-                            label = {'Изменить'}
-                            onClick = {() => {onModify(form, data)}}
-                            className = {'submit'}
+                            label={'Изменить'}
+                            onClick={() => {onModify(form, data)}}
+                            className={(isValidInput.heading && isValidInput.description)
+                                ? 'button button_submit'
+                                : 'button button_submit button_disabled'}
+                            disabled={!(isValidInput.heading && isValidInput.description)}
+                            ref={ref}
                         />
                     }
                 </div>

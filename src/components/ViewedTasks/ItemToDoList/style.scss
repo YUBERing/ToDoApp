@@ -1,47 +1,35 @@
 
-.to-do-task {
+.viewed-tasks__to-do-task {
         display: flex;
         width: 100%;
         box-sizing: border-box;
 }
 
-.headings {
-        display: flex;
-        align-items: center;
+.viewed-tasks__headings {
         width: 100%;
         font-size: 24px;
         margin-right: 10px;
-        word-break: break-all;
-        cursor: pointer;
-
-        .headings__arrow{
-                transition: all 0.5s;
-                margin-right: 10px;
-        }
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: start;
 
         @media screen and (max-width: 767px) and (min-width: 320px){
                 width: calc(100% - 50px)
         }
 }
 
-.headings__arrow_open {
-        transform: rotate(90deg);
-}
-
-.description {
-        display: none;
-        word-wrap: break-word;
-        word-break: break-all;
+.viewed-tasks__description {
         min-width: 100%;
         box-sizing: border-box;
         font-size: 20px;
+        text-align: start;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
 }
 
-.description_open {
-        display: flex;
-}
-
-.date {
+.viewed-tasks__date {
         display: flex;
         margin-right: 10px;
         box-sizing: border-box;
@@ -53,7 +41,7 @@
         }
 }
 
-.buttons {
+.viewed-tasks__buttons {
         display: flex;
         box-sizing: border-box;
         align-items: center;
@@ -70,7 +58,7 @@
 
 }
 
-.favorite {
+.viewed-tasks__favorite {
         display: flex;
         margin-right: 10px;
         box-sizing: border-box;

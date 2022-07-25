@@ -1,5 +1,7 @@
 import {React} from 'react';
 
+import Label from "../Label";
+
 import './style.scss';
 
 function Input(props) {
@@ -9,19 +11,29 @@ function Input(props) {
         name,
         className,
         onChange,
+        onKeyPress,
+        errorMessage,
     } = props;
 
     return (
         <div className={className}>
-            {label}
+            <Label
+                content={label}
+                className={'label'}
+            />
             <input
-            required
-            type='text'
-            value={value}
-            onChange={(event) => {onChange(event.target.value, name)}}
+                name={name}
+                type='text'
+                value={value}
+                onChange={(event) => {onChange(event.target.value, name)}}
+                onKeyPress={onKeyPress}
+            />
+            <Label
+                content={errorMessage}
+                className={'error-message'}
             />
         </div>
-    )
-};
+    );
+}
 
 export default Input;

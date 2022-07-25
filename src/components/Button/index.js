@@ -1,20 +1,25 @@
-import {React} from 'react';
+import {forwardRef, React} from 'react';
 
 import './style.scss';
 
-function Button(props) {
+const Button = forwardRef((props, ref) => {
     const {
         label,
         onClick,
         className,
-        ref,
+        disabled,
     } = props;
 
     return(
-        <button className={className} onClick={onClick} ref={ref}>
+        <button
+            className={className}
+            onClick={onClick}
+            ref={ref}
+            disabled={disabled}
+        >
             {label}
         </button>
-    )
-}
+    );
+});
 
 export default Button;

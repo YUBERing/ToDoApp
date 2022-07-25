@@ -1,37 +1,43 @@
-import React from "react";
+import React from "react"
 
-import TasksCategory from "./Category";
-import SearchBar from "../SearchBar";
-
-import {CATEGORY_LIST} from "../../constants/tasks";
+import CalendarMenu from "../CalendarMenu";
+import SideBar from "../SideBar";
+import Button from "../Button";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import MenuIcon from '@mui/icons-material/Menu';
 
 import './style.scss'
 
-function Header(props) {
 
+function Header(props){
     const {
-        regularPage,
+      isRegularPage,
+      onClick,
     } = props;
 
-    const getCategories = () => {
-        return CATEGORY_LIST.map((item, i) => {
-            return (
-                <TasksCategory
-                    label={item.label}
-                    className={'categories__point'}
-                    type={item.type}
-                    regularPage={regularPage}
-                />
-            );
-        })
-    }
-
     return (
-        <header>
-            <div className='categories'>
-                {getCategories()}
+        <header className={'header'}>
+            <div className={'header__menu'}>
+                <div className={'header__menu-side-bar'}>
+                    <MenuIcon/>
+                    <SideBar/>
+                </div>
+                <CalendarMenu
+                    isRegularPage={isRegularPage}
+                />
             </div>
-            <SearchBar regularPage={regularPage}/>
+            {
+                isRegularPage &&
+                <Button
+                    label={<AddCircleOutlineIcon
+                        sx={{
+                            fontSize: 50
+                        }}
+                    />}
+                    onClick={onClick}
+                    className={'button button_add-to-do'}
+                />
+            }
         </header>
     );
 }

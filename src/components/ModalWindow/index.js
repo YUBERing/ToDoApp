@@ -7,12 +7,12 @@ import './style.scss';
 function ModalWindow(props) {
     const {
         onClose,
-        children
+        children,
     } = props;
 
     return(
-        <div className='modal-window modal-window_back'>
-            <div className='modal-window modal-window_front'>
+        <div className='modal-window modal-window_open'>
+            <div className='modal-window__workplace'>
                 <ModalWindowHeader
                     headName = {'Задача'}
                     onClose = {onClose}

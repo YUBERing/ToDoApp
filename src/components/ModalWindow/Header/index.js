@@ -11,7 +11,6 @@ function ModalWindowHeader(props) {
         className
     } = props
 
-
     return (
         <div className={className}>
             <div>{headName}</div>

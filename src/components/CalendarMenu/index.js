@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import Calendar from "react-calendar";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-import {findTasksAccordingPage} from "../../utils/findTasksAccordingPage";
+import {findTasksForPage} from "../../utils/findTasksForPage";
 
 import {updateToDoList} from "../../store/actionCreators/todos";
 
@@ -13,7 +13,7 @@ import 'react-calendar/dist/Calendar.css';
 
 function CalendarMenu(props) {
     const {
-        regularPage,
+        isRegularPage,
     } = props;
 
     const dispatch = useDispatch();
@@ -25,10 +25,10 @@ function CalendarMenu(props) {
             localStorage.todoArr = JSON.stringify([]);
         }
 
-        const dayTasks = findTasksAccordingPage(regularPage).filter(
+        const dayTasks = findTasksForPage(isRegularPage).filter(
             item => new Date(Date.parse(item.date))
                 .toLocaleDateString() === value.toLocaleDateString()
-        )
+        );
 
         dispatch(updateToDoList(dayTasks));
     }
@@ -39,11 +39,12 @@ function CalendarMenu(props) {
             localStorage.todoArr = JSON.stringify([]);
         }
 
-        const item = findTasksAccordingPage(regularPage)
+        const item = findTasksForPage(isRegularPage)
             .find(item => new Date(Date.parse(item.date))
-                .toLocaleDateString() === date.toLocaleDateString());
+                .toLocaleDateString() === date.toLocaleDateString()
+            );
 
-        return item !== undefined ? 'calendar_day' : null
+        return item !== undefined ? 'calendar_day-green' : null
     }
 
     return (
@@ -52,13 +53,14 @@ function CalendarMenu(props) {
             <div className='calendar-menu__calendar'>
                 <Calendar
                     onChange={onChange}
-                    onClickDay={onClickDay(value)}
+                    onClickDay={onClickDay}
                     tileClassName={tileDayThisTask}
                     value={value}
+                    locale={'ru-RU'}
                 />
             </div>
         </div>
-    )
+    );
 }
 
 export default CalendarMenu

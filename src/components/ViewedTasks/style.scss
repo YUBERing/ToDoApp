@@ -42,19 +42,7 @@
   justify-content: center;
 }
 
-.add-to-do {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 60px;
-  border: none;
-  background-color: #dcf2ea;
-  border-radius: 10px;
-  svg{
-    color: #1f634a;
-  }
-}
+
 
 .viewed-tasks__item-to-do-list {
   display: flex;
@@ -64,11 +52,12 @@
   justify-content: space-between;
   background-color: #b8ded0;
   border-radius: 10px;
-  padding: 5px 10px;
-  height: auto;
+  padding: 6px 10px;
+  height: 80px;
   box-sizing: border-box;
 
   &:not(:last-child) {
     margin-bottom: 10px;
   }
 }
+

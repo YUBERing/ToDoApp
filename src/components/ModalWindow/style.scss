@@ -2,7 +2,7 @@
   position: fixed;
 }
 
-.modal-window_back{
+.modal-window_open{
     background: rgba(0, 0, 0, 0.3);
     z-index: 1000;
     left: 0;
@@ -15,19 +15,18 @@
     align-items: center;
   }
   
-  .modal-window_front{
+  .modal-window__workplace{
     background-color: white;
     max-width: 500px;
     width: 100%;
     height: auto;
-    z-index: 99999;
     margin:auto;
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box;
 
     @media screen and (max-width: 767px) and (min-width: 320px){
-      max-width: 300px;
+      max-width: 100%;
     }
   }
 

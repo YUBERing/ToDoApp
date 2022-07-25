@@ -1,14 +1,13 @@
-import {React, useState} from 'react';
+import {React} from 'react';
 
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import './style.scss';
 import yellow from "@mui/material/colors/yellow";
 
+import './style.scss';
 
 function ViewedTasksItemToDoList(props) {
     const {
@@ -17,39 +16,33 @@ function ViewedTasksItemToDoList(props) {
         onDeleteItem,
         onChangeItem,
         onCheck,
+        style,
     } = props
 
     const date = new Date(Date.parse(item.date)).toLocaleDateString();
 
-    const [open, setOpen] = useState(false);
-
-    const onClickToReveal = () => {
-        setOpen(!open);
-    }
-
     return (
-        <div className={className}  key={item.id}>
-            <div className='to-do-task'>
-                <div className='headings' onClick={() => {onClickToReveal()}}>
-                    <div className={open ? 'headings__arrow headings__arrow_open' : 'headings__arrow'}><ArrowForwardIosIcon sx={{fontSize: 20}}/></div>
+        <div className={className}  key={item.id} style={style}>
+            <div className='viewed-tasks__to-do-task'>
+                <div className='viewed-tasks__headings' title={item.heading}>
                     {item.heading}
                 </div>
-                <div className='date'>
+                <div className='viewed-tasks__date'>
                     {date}
                 </div>
-                <div className={'favorite'}>
+                <div className={'viewed-tasks__favorite'}>
                     {
                         item.favorite
                             ? <StarIcon sx={{color: yellow[500]}} onClick={() => onCheck(item)}/>
                             : <StarBorderIcon sx={{color: yellow[800]}} onClick={() => onCheck(item)}/>
                     }
                 </div>
-                <div className='buttons'>
+                <div className='viewed-tasks__buttons'>
                     <EditIcon onClick={() => {onChangeItem(item)}}/>
                     <DeleteIcon onClick={() => {onDeleteItem(item)}}/>
                 </div>
             </div>
-            <div className={open ? 'description description_open' : 'description'}>
+            <div className={'viewed-tasks__description'} title={item.description}>
                 {item.description}
             </div>
         </div>

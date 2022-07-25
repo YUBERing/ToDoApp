@@ -1,23 +1,38 @@
 import React from "react";
 
 import ViewedTasks from "../ViewedTasks";
-import CalendarMenu from "../CalendarMenu";
+import Header from "../Header";
 
-import './style.scss'
 import {useTasksEditPage} from "../../hooks/usePage";
 
-function FavoriteTasks() {
-    const regularPage = false;
+import './style.scss'
 
-    useTasksEditPage({regularPage});
+function FavoriteTasks() {
+    const isRegularPage = false;
+
+    const {
+        isOpen,
+        setOpen,
+        data,
+        setData,
+        onClick,
+    } = useTasksEditPage(isRegularPage);
 
     return (
         <div className="favorite-tasks">
             <div className='favorite-tasks__to-do-list'>
-                <CalendarMenu
-                    regularPage={regularPage}
+                <Header
+                    isRegularPage={isRegularPage}
+                    onClick={onClick}
                 />
-                <ViewedTasks regularPage={regularPage}/>
+                <ViewedTasks
+                    isRegularPage={isRegularPage}
+                    isOpen={isOpen}
+                    setOpen={setOpen}
+                    data={data}
+                    setData={setData}
+                    onClick={onClick}
+                />
             </div>
         </div>
     );

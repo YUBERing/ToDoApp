@@ -1,0 +1,42 @@
+.selection-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0px 10px 0px;
+    width: 100%;
+  }
+
+  .selection-field__categories {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0px 0px 10px 0px;
+
+    @media screen and (max-width: 767px) and (min-width: 320px) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      width: 100%;
+    }
+  }
+
+  .selection-field__category {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    height: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    background-color: white;
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+
+    &:hover {
+      background-color: #dcf2ea;
+    }
+  }
