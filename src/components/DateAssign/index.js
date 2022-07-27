@@ -6,22 +6,24 @@ import Label from "../Label";
 import 'react-datepicker/dist/react-datepicker.css'
 import './style.scss';
 
-
 function DateAssign(props) {
     const {
         name,
         label,
         value,
         onChange,
-        onKeyPress,
+        isDisabled,
     } = props;
 
     const CustomInput = forwardRef(
         ({value, onClick}, ref) => (
           <div
-            onClick={onClick}
+            onClick={
+                !isDisabled
+                ? onClick
+                : undefined
+            }
             className={'custom-input'}
-            onKeyPress={onKeyPress}
             ref={ref}
           >
               {value}

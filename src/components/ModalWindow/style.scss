@@ -1,33 +1,21 @@
-.modal-window {
-  position: fixed;
-}
-
-.modal-window_open{
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-window__workplace{
+  .modal-window {
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
     background-color: white;
     max-width: 500px;
     width: 100%;
     height: auto;
-    margin:auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-sizing: border-box;
 
     @media screen and (max-width: 767px) and (min-width: 320px){
       max-width: 100%;
     }
+  }
+
+
+  .modal-window_open{
+    margin:auto;
+    z-index: 2;
   }
 
 

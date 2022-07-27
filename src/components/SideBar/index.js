@@ -1,13 +1,16 @@
 import React from "react";
 
 import {NavLink} from "react-router-dom";
+import CloseIcon from '@mui/icons-material/Close';
 
 import {LINK_LIST} from "../../constants/link";
 
 import './style.scss'
 
-function SideBar() {
-
+function SideBar(props) {
+    const {
+        onClick,
+    } = props;
     const getLinksToPages = () => {
         return LINK_LIST.map((item) => {
             return (
@@ -28,8 +31,8 @@ function SideBar() {
     }
 
     return (
-        <div className='side-bar side-bar_size-s'>
-            <div>ToDoAPP</div>
+        <div className='side-bar' onClick={(e) => e.stopPropagation()}>
+            <div>ToDoAPP <CloseIcon onClick={onClick}/></div>
             <div className={'side-bar__navigation'}>
                 {getLinksToPages()}
             </div>

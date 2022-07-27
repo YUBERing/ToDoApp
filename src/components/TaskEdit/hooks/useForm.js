@@ -1,8 +1,15 @@
-import {createRef, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
+
+import {SIZE_LABEL} from "../../../constants/magicNumber";
 
 import {nanoid} from "nanoid";
 
 export const useTaskEditForm = ({data}) => {
+    const [errorMessages, setErrorMessages] = useState({
+        heading: '',
+        description: '',
+    });
+
     const [form, setForm] = useState({
         id: nanoid(),
         heading: '',
@@ -10,81 +17,64 @@ export const useTaskEditForm = ({data}) => {
         date: new Date(),
         favorite: false});
 
-    const [errorMessages, setErrorMessages] = useState({
-        heading: '',
-        description: '',
-    });
-
-    const [isValidInput, setValidInput] = useState({
-        heading: false,
-        description: false,
-    });
-
-    const ref = createRef();
-
     useEffect(() => {
         if (!data) {
-            console.log('+++');
-         return
+            setErrorMessages({
+                heading: 'Введите заголовок',
+                description: 'Введите описание'
+            });
+            return
         }
 
-        console.log('+++');
-        const { index, ...form } = data;
+        const { index, ...task } = data;
 
-        setValidInput({
-            heading: true,
-            description: true,
-        });
-
-        setForm(form);
+        setForm(task);
     }, []);
+
+    useEffect(() => {
+        console.log(errorMessages)
+    }, [errorMessages])
 
     const validateForm = (name, value) => {
         switch (name) {
             case 'heading':
                 if (!value) {
                     setErrorMessages({...errorMessages, [name]: 'Введите заголовок'});
-                    setValidInput({...isValidInput, [name]: false});
+                    console.log(1)
                     break;
                 }
 
-                if (value.length > 100) {
+                if (value.length > SIZE_LABEL.SIZE_HEADING) {
                     setErrorMessages({...errorMessages, [name]: 'Превышен лимит в 100 символов'});
-                    setValidInput({...isValidInput, [name]: false});
+                    console.log(2)
                     break;
                 }
 
                 if (value.match('[^А-Яа-яЁё ]')) {
                     setErrorMessages({...errorMessages, [name]: 'Допустимые сиволы А-Я, а-я и пробел'});
-                    setValidInput({...isValidInput, [name]: false});
+                    console.log(3)
                     break;
                 }
-
+                console.log(0)
                 setErrorMessages({...errorMessages, [name]: ''});
-                setValidInput({...isValidInput, [name]: true});
-
                 break;
             case 'description':
                 if (!value) {
                     setErrorMessages({...errorMessages, [name]: 'Введите описание'});
-                    setValidInput({...isValidInput, [name]: false});
                     break;
                 }
 
-                if (value.length > 1000) {
+                if (value.length > SIZE_LABEL.SIZE_DESCRIPTION) {
                     setErrorMessages({...errorMessages, [name]: 'Превышен лимит в 1000 символов'});
-                    setValidInput({...isValidInput, [name]: false});
                     break;
                 }
 
                 if (value.match('[^А-Яа-яЁё ?!:+()]')) {
                     setErrorMessages({...errorMessages, [name]: 'Допустимые сиволы А-Я, а-я, ?, !, :, + и ()'});
-                    setValidInput({...isValidInput, [name]: false});
                     break;
                 }
 
                 setErrorMessages({...errorMessages, [name]: ''});
-                setValidInput({...isValidInput, [name]: true});
                 break;
             default:
                 break;
@@ -96,18 +86,9 @@ export const useTaskEditForm = ({data}) => {
         validateForm(name, value);
     }
 
-    function onEnterPress(e) {
-        if (e.keyCode === 13) {
-            ref.current.click();
-        }
-    }
-
     return {
-        isValidInput,
-        ref,
         errorMessages,
         form,
         onChange,
-        onEnterPress,
     }
 }

@@ -13,6 +13,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         text-align: start;
+        cursor: pointer;
 
         @media screen and (max-width: 767px) and (min-width: 320px){
                 width: calc(100% - 50px)

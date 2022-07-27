@@ -1,26 +1,32 @@
-import {React} from 'react';
+import {React, useState} from 'react';
 
 import ModalWindowHeader from './Header/index';
 
 import './style.scss';
+import Layer from "../Layer";
 
 function ModalWindow(props) {
     const {
+        name,
         onClose,
         children,
+        isDisabled,
     } = props;
 
     return(
-        <div className='modal-window modal-window_open'>
-            <div className='modal-window__workplace'>
+        <Layer onClick={onClose}>
+            <div className='modal-window modal-window_open' onClick={e => e.stopPropagation()}>
                 <ModalWindowHeader
-                    headName = {'Задача'}
+                    headName = {
+                        isDisabled
+                        ? 'Просмотр'
+                        : 'Задача'}
                     onClose = {onClose}
                     className={'modal-window__header'}
                 />
                 {children}
             </div>
-        </div>
+        </Layer>
     );
 }
 

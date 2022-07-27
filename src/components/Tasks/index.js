@@ -16,6 +16,8 @@ function Tasks() {
       setOpen,
       data,
       setData,
+      isViewing,
+      setViewing,
       onClick,
   } = useTasksEditPage(isRegularPage);
 
@@ -33,6 +35,8 @@ function Tasks() {
             isOpen={isOpen}
             setOpen={setOpen}
             onClick={onClick}
+            isViewing={isViewing}
+            setViewing={setViewing}
         />
       </div>
     </div>

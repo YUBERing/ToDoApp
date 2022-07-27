@@ -13,6 +13,7 @@ function TextArea(props){
         onChange,
         onKeyPress,
         errorMessage,
+        isDisabled,
     } = props;
 
     return (
@@ -26,6 +27,7 @@ function TextArea(props){
                 value={value}
                 onChange={(event) => {onChange(event.target.value, name)}}
                 onKeyDown={onKeyPress}
+                disabled={isDisabled}
             />
             <Label
                 content={errorMessage}

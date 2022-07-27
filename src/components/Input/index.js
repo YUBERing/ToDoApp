@@ -13,6 +13,7 @@ function Input(props) {
         onChange,
         onKeyPress,
         errorMessage,
+        isDisabled,
     } = props;
 
     return (
@@ -27,6 +28,7 @@ function Input(props) {
                 value={value}
                 onChange={(event) => {onChange(event.target.value, name)}}
                 onKeyPress={onKeyPress}
+                disabled={isDisabled}
             />
             <Label
                 content={errorMessage}

@@ -20,7 +20,7 @@ function SelectionFieldCategory(props) {
 
     const dispatch = useDispatch();
 
-    const selectTask = (type) => {
+    const selectTasks = (type) => {
         if (!localStorage.todoArr) {
             localStorage.todoArr = JSON.stringify([]);
         }
@@ -67,7 +67,7 @@ function SelectionFieldCategory(props) {
     return (
         <div
             className={className}
-            onClick = {() => {selectTask(type)}}
+            onClick = {() => {selectTasks(type)}}
         >
             {label}
         </div>

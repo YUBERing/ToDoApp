@@ -12,7 +12,7 @@ const Button = forwardRef((props, ref) => {
 
     return(
         <button
-            className={className}
+            className={`button ${className}`}
             onClick={onClick}
             ref={ref}
             disabled={disabled}

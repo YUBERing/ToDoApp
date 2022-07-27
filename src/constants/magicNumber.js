@@ -1,0 +1,4 @@
+export const SIZE_LABEL = {
+    SIZE_HEADING: 100,
+    SIZE_DESCRIPTION: 1000,
+}

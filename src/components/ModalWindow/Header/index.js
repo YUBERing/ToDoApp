@@ -8,7 +8,7 @@ function ModalWindowHeader(props) {
     const {
         headName,
         onClose,
-        className
+        className,
     } = props
 
     return (

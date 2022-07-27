@@ -17,14 +17,15 @@ function ViewedTasksItemToDoList(props) {
         onChangeItem,
         onCheck,
         style,
-    } = props
+        onClick,
+    } = props;
 
     const date = new Date(Date.parse(item.date)).toLocaleDateString();
 
     return (
         <div className={className}  key={item.id} style={style}>
             <div className='viewed-tasks__to-do-task'>
-                <div className='viewed-tasks__headings' title={item.heading}>
+                <div className='viewed-tasks__headings' title={item.heading} onClick={() => onClick(item)}>
                     {item.heading}
                 </div>
                 <div className='viewed-tasks__date'>

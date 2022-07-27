@@ -4,7 +4,11 @@
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  max-height: calc(100% - 50px);
+  max-height: calc(100% - 60px);
+
+  @media screen and (max-width: 1599px) and (min-width: 320px) {
+    max-height: calc(100% - 120px);
+  }
 }
 
 .viewed-tasks__header {
@@ -21,9 +25,9 @@
   box-sizing: border-box;
   background-color: #dcf2ea;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 0px 10px 10px;
   height: 100%;
-  max-height: calc(100% - 150px);
+  max-height: calc(100% - 200px);
 
   &::-webkit-scrollbar {
     background-color: #dcf2ea;
@@ -42,7 +46,9 @@
   justify-content: center;
 }
 
-
+.ReactVirtualized__List {
+  padding-right: 10px;
+}
 
 .viewed-tasks__item-to-do-list {
   display: flex;
@@ -59,5 +65,20 @@
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+}
+
+.button_pagination {
+  border: 0px;
+  margin-bottom: 10px;
+  width: auto;
+  height: 30px;
+  background-color: #dcf2ea;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #1f634a;
+}
+
+.button_active {
+  background-color: #76c4a8;
 }
 

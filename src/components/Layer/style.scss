@@ -1,0 +1,21 @@
+.layer {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .side-bar {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    left: 0px;
+    z-index: 2;
+  }
+}

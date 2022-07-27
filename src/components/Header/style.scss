@@ -1,19 +1,20 @@
 .header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .header__menu {
   display: flex;
+  justify-content: space-between;
 }
 
 .header__menu-side-bar {
   display: none;
   position: relative;
-  margin-right: 10px;
   min-height: 60px;
   min-width: 60px;
+  width: 60px;
+  height: 60px;
 
   svg {
     width: 40px;
@@ -27,14 +28,6 @@
 
     svg {
       cursor: pointer;
-    }
-
-    &:hover .side-bar_size-s {
-      display: flex;
-      position: absolute;
-      top: 60px;
-      left: -20px;
-      z-index: 2;
     }
   }
 }

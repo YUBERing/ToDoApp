@@ -1,4 +1,5 @@
-import React from "react"
+import React, {useState} from "react"
+import {createPortal} from "react-dom";
 
 import CalendarMenu from "../CalendarMenu";
 import SideBar from "../SideBar";
@@ -7,7 +8,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MenuIcon from '@mui/icons-material/Menu';
 
 import './style.scss'
-
+import Layer from "../Layer";
 
 function Header(props){
     const {
@@ -15,29 +16,39 @@ function Header(props){
       onClick,
     } = props;
 
+    const [isOpen, setOpen] = useState(false);
+
+    const onOpenSideBar = () => {
+        setOpen(!isOpen);
+    }
+
     return (
         <header className={'header'}>
+            <div className={'header__menu-side-bar'}>
+                <MenuIcon onClick={onOpenSideBar}/>
+                {isOpen &&
+                    <Layer onClick={onOpenSideBar}>
+                        <SideBar onClick={onOpenSideBar}/>
+                    </Layer>
+                }
+            </div>
             <div className={'header__menu'}>
-                <div className={'header__menu-side-bar'}>
-                    <MenuIcon/>
-                    <SideBar/>
-                </div>
                 <CalendarMenu
                     isRegularPage={isRegularPage}
                 />
+                {
+                    isRegularPage &&
+                    <Button
+                        label={<AddCircleOutlineIcon
+                            sx={{
+                                fontSize: 50
+                            }}
+                        />}
+                        onClick={onClick}
+                        className={'button_add-to-do'}
+                    />
+                }
             </div>
-            {
-                isRegularPage &&
-                <Button
-                    label={<AddCircleOutlineIcon
-                        sx={{
-                            fontSize: 50
-                        }}
-                    />}
-                    onClick={onClick}
-                    className={'button button_add-to-do'}
-                />
-            }
         </header>
     );
 }
