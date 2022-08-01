@@ -5,11 +5,20 @@ import './style.scss';
 const Label = (props) => {
     const {
         content,
-        className,
+        actionKey,
     } = props;
 
+    const getClassName = (key) => {
+        switch(key) {
+            case 'error-message':
+                return ' label_error-message';
+            default:
+                return '';
+        }
+    }
+
     return (
-        <div className={className}>
+        <div className={`label${getClassName(actionKey)}`}>
             {content}
         </div>
     );

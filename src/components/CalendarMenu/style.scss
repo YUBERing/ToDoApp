@@ -1,9 +1,16 @@
 .calendar-menu__calendar{
-  display: none;
-  position: fixed;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  left: 0px;
 
   .calendar_day-green {
     background-color: #76c4a8;
+  }
+
+  .calendar_day-grey {
+    background-color: rgba(0,0,0,0.3);
   }
 
   @media screen and (max-width: 767px) and (min-width: 320px) {
@@ -19,21 +26,9 @@
   align-items: center;
   justify-content: center;
 
-  svg{
-
+  .calendar-menu__icon{
+    font-size: 50px;
     cursor:pointer;
     color:#1f634a;
-  }
-
-  &:hover .calendar-menu__calendar{
-    display: block;
-    position: absolute;
-    z-index: 1;
-    top: 60px;
-    left: 0px;
-
-    @media screen and (max-width: 767px) and (min-width: 320px) {
-      left: -60px
-    }
   }
 }

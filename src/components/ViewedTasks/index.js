@@ -5,15 +5,13 @@ import SelectionField from "../SelectionField";
 import TaskEdit from "../TaskEdit";
 import ViewedTasksItemToDoList from "./ItemToDoList";
 import {List, AutoSizer} from "react-virtualized";
-
-import {sortByDate} from "../../utils/array";
+import Button from "../Button";
+import ViewedTasksPaginateList from "./PaginateList";
 
 import {updateToDoList} from "../../store/actionCreators/todos";
 
 import './style.scss'
 import 'react-virtualized/styles.css';
-import Button from "../Button";
-import ViewedTasksPaginateList from "./PaginateList";
 
 function ViewedTasks(props) {
     const {
@@ -72,43 +70,6 @@ function ViewedTasks(props) {
         })));
     }
 
-    function onSubmit(form) {
-        if (localStorage.todoArr === null) {
-            localStorage.todoArr = JSON.stringify([]);
-        }
-
-        const todoList = [...JSON.parse(localStorage.todoArr), form];
-
-        setOpen(!isOpen);
-        sortByDate(todoList);
-
-        localStorage.todoArr = JSON.stringify(todoList);
-        dispatch(updateToDoList(JSON.parse(localStorage.todoArr)));
-    }
-
-    const onModifyCard = (form, element) => {
-        const toDoList = JSON.parse(localStorage.todoArr);
-
-        const indexLocalStorage = toDoList.findIndex(item => item.id === element.id);
-
-        toDoList[indexLocalStorage] = form;
-        sortByDate(toDoList);
-
-        localStorage.todoArr = JSON.stringify(toDoList);
-        const indexTodos = todosList.findIndex(item => item.id === element.id);
-
-        dispatch(updateToDoList(todosList.map((item, index) => {
-            if (index === indexTodos) {
-                return form
-            }
-
-            return item
-        })));
-
-        setOpen(!isOpen);
-        setData(null);
-    }
-
     const onViewing = (item, index) => {
         setOpen(!isOpen);
         setViewing(!isViewing);
@@ -120,7 +81,6 @@ function ViewedTasks(props) {
                 <ViewedTasksItemToDoList
                     key={key}
                     item={todosList[index]}
-                    className={'viewed-tasks__item-to-do-list'}
                     onDeleteItem={onDeleteCard}
                     onChangeItem={onChangeCard}
                     onCheck={onCheck}
@@ -143,9 +103,8 @@ function ViewedTasks(props) {
             <Button
                 label={'Пагинация?'}
                 onClick={() => {setPagination(!isPagination)}}
-                className={isPagination
-                    ? 'button_pagination'
-                    : 'button_pagination button_active'}
+                isPagination={isPagination}
+                actionKey={'pagination'}
             />
             <div className='viewed-tasks__to-do-list'>
                 {
@@ -181,10 +140,11 @@ function ViewedTasks(props) {
                     isOpen &&
                     <TaskEdit
                         onClose={onClick}
-                        onSubmit={onSubmit}
                         data={data}
-                        onModify={onModifyCard}
                         isDisabled={isViewing}
+                        setData={setData}
+                        isOpen={isOpen}
+                        setOpen={setOpen}
                     />
                 }
             </div>

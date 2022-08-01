@@ -1,0 +1,25 @@
+.selection-field__category {
+  border: 1px solid gray;
+  border-radius: 10px;
+  min-width: 100px;
+  height: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  background-color: white;
+  text-align: center;
+  line-height: 46px;
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  &:hover {
+    background-color: #dcf2ea;
+  }
+}
+
+.selection-field__category_active {
+  background-color: #b8ded0;
+}

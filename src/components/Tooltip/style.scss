@@ -1,0 +1,31 @@
+.tooltip {
+  position:absolute;
+  display: block;
+  padding: 10px;
+  min-height: 30px;
+  min-width: 100px;
+  width: 260px;
+  text-align: left;
+  background: rgba(184, 222, 208, 1);
+  border: 2px solid #1f634a;
+  border-radius: 5px;
+  box-sizing: border-box;
+  top: 55px;
+  left: -70px;
+  text-align: justify-all;
+  white-space: pre-wrap;
+  z-index: 2;
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    left:73px;
+    top:-15px;
+    width:0px;
+    height:0px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #1f634a;
+  }
+}

@@ -1,10 +1,16 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
-import {SIZE_LABEL} from "../../../constants/magicNumber";
+import Button from "../../Button";
+
+import {SIZE_LABEL} from "../constans/magicNumber";
 
 import {nanoid} from "nanoid";
+import {sortByDate} from "../../../utils/array";
+import {updateToDoList} from "../../../store/actionCreators/todos";
 
-export const useTaskEditForm = ({data}) => {
+
+export const useTaskEditForm = (data, isOpen, setOpen, setData, isDisabled) => {
     const [errorMessages, setErrorMessages] = useState({
         heading: '',
         description: '',
@@ -15,14 +21,16 @@ export const useTaskEditForm = ({data}) => {
         heading: '',
         description: '',
         date: new Date(),
-        favorite: false});
+        favorite: false,
+    });
+
+    let errorTitle = {
+        heading: '',
+        description: '',
+    };
 
     useEffect(() => {
         if (!data) {
-            setErrorMessages({
-                heading: 'Введите заголовок',
-                description: 'Введите описание'
-            });
             return
         }
 
@@ -35,60 +43,146 @@ export const useTaskEditForm = ({data}) => {
         console.log(errorMessages)
     }, [errorMessages])
 
-    const validateForm = (name, value) => {
-        switch (name) {
-            case 'heading':
-                if (!value) {
-                    setErrorMessages({...errorMessages, [name]: 'Введите заголовок'});
-                    console.log(1)
-                    break;
-                }
+    const dispatch = useDispatch();
 
-                if (value.length > SIZE_LABEL.SIZE_HEADING) {
-                    setErrorMessages({...errorMessages, [name]: 'Превышен лимит в 100 символов'});
-                    console.log(2)
-                    break;
-                }
+    const todosList = useSelector(state => state.todos.list);
 
-                if (value.match('[^А-Яа-яЁё ]')) {
-                    setErrorMessages({...errorMessages, [name]: 'Допустимые сиволы А-Я, а-я и пробел'});
-                    console.log(3)
-                    break;
-                }
-                console.log(0)
-                setErrorMessages({...errorMessages, [name]: ''});
-                break;
-            case 'description':
-                if (!value) {
-                    setErrorMessages({...errorMessages, [name]: 'Введите описание'});
-                    break;
-                }
+    const validateForm = (form) => {
+        const keyList = Object.keys(form);
 
-                if (value.length > SIZE_LABEL.SIZE_DESCRIPTION) {
-                    setErrorMessages({...errorMessages, [name]: 'Превышен лимит в 1000 символов'});
-                    break;
-                }
+        keyList.map((item) => {
+            switch (item) {
+                case 'heading':
+                    if (!form[item]) {
+                        errorTitle[item] = 'Введите заголовок';
+                        break;
+                    }
 
-                if (value.match('[^А-Яа-яЁё ?!:+()]')) {
-                    setErrorMessages({...errorMessages, [name]: 'Допустимые сиволы А-Я, а-я, ?, !, :, + и ()'});
-                    break;
-                }
+                    if (form[item].length > SIZE_LABEL.SIZE_HEADING) {
+                        errorTitle[item] = 'Превышен лимит в 100 символов';
+                        break;
+                    }
 
-                setErrorMessages({...errorMessages, [name]: ''});
-                break;
-            default:
-                break;
-        }
+                    if (form[item].match('[^А-Яа-яЁё ]')) {
+                        errorTitle[item] = 'Допустимые сиволы А-Я, а-я и пробел';
+                        break;
+                    }
+
+                    errorTitle[item] = '';
+                    break;
+                case 'description':
+                    if (!form[item]) {
+                        errorTitle[item] = 'Введите описание';
+                        break;
+                    }
+
+                    if (form[item].length > SIZE_LABEL.SIZE_DESCRIPTION) {
+                        errorTitle[item] = 'Превышен лимит в 1000 символов';
+                        break;
+                    }
+
+                    if (form[item].match('[^А-Яа-яЁё ?!:+()]')) {
+                        errorTitle[item] = 'Допустимые сиволы А-Я, а-я, ?, !, :, + и ()';
+                        break;
+                    }
+
+                    errorTitle[item] = '';
+                    break;
+                default:
+                    break;
+            }
+        })
     }
 
     function onChange(value, name){
         setForm({...form, [name]: value});
-        validateForm(name, value);
+    }
+
+    function onSubmit(form) {
+        validateForm(form);
+        if (!(errorTitle.heading || errorTitle.description)) {
+            setErrorMessages(errorTitle);
+            if (localStorage.todoArr === null) {
+                localStorage.todoArr = JSON.stringify([]);
+            }
+
+            const todoList = [...JSON.parse(localStorage.todoArr), form];
+
+            setOpen(!isOpen);
+            sortByDate(todoList);
+
+            localStorage.todoArr = JSON.stringify(todoList);
+            dispatch(updateToDoList(JSON.parse(localStorage.todoArr)));
+
+            return
+        }
+
+        setErrorMessages(errorTitle);
+    }
+
+    const onModifyCard = (form, element) => {
+        validateForm(form)
+        if (!(errorTitle.heading || errorTitle.description)) {
+            setErrorMessages(errorTitle);
+            const toDoList = JSON.parse(localStorage.todoArr);
+
+            const indexLocalStorage = toDoList.findIndex(item => item.id === element.id);
+
+            toDoList[indexLocalStorage] = form;
+            sortByDate(toDoList);
+
+            localStorage.todoArr = JSON.stringify(toDoList);
+            const indexTodos = todosList.findIndex(item => item.id === element.id);
+
+            dispatch(updateToDoList(todosList.map((item, index) => {
+                if (index === indexTodos) {
+                    return form
+                }
+
+                return item
+            })));
+
+            setOpen(!isOpen);
+            setData(null);
+
+            return
+        }
+
+        setErrorMessages(errorTitle);
+    }
+
+    const getButton = () => {
+        console.log(data);
+        if (!data) {
+            return (
+                <Button
+                    label={'Добавить'}
+                    onClick={() => {onSubmit(form)}}
+                    actionKey={'submit'}
+                />
+            )
+        }
+
+        if (isDisabled) {
+            return undefined
+        }
+
+        return (
+            <Button
+                label={'Изменить'}
+                onClick={() => {
+                    onModifyCard(form, data);
+                }}
+                actionKey={'submit'}
+            />
+        )
     }
 
     return {
         errorMessages,
         form,
         onChange,
+        onModifyCard,
+        getButton,
     }
 }

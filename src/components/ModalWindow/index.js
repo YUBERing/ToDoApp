@@ -17,12 +17,12 @@ function ModalWindow(props) {
         <Layer onClick={onClose}>
             <div className='modal-window modal-window_open' onClick={e => e.stopPropagation()}>
                 <ModalWindowHeader
+                    isDisabled={!isDisabled}
                     headName = {
                         isDisabled
                         ? 'Просмотр'
                         : 'Задача'}
                     onClose = {onClose}
-                    className={'modal-window__header'}
                 />
                 {children}
             </div>

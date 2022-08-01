@@ -31,7 +31,7 @@ export const useTasksEditPage = (isRegularPage) => {
         }
 
         dispatch(updateToDoList(findTasksForPage(isRegularPage)));
-    });
+    }, []);
 
     return {
         isOpen,

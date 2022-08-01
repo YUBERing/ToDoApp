@@ -18,7 +18,13 @@ function CalendarMenu(props) {
 
     const dispatch = useDispatch();
 
-    const [value, onChange] = useState(new Date());
+    const [value, setValue] = useState(new Date());
+
+    const [isOpen, setOpen] = useState(false);
+
+    const onOpenCalendarMenu = () => {
+        setOpen(!isOpen);
+    }
 
     const onClickDay = (value) => {
         if (!localStorage.todoArr) {
@@ -44,21 +50,39 @@ function CalendarMenu(props) {
                 .toLocaleDateString() === date.toLocaleDateString()
             );
 
-        return item !== undefined ? 'calendar_day-green' : null
+        if (item) {
+            if (new Date(Date.parse(item.date)) < new Date()) {
+                return "calendar_day-grey"
+            }
+
+            if (new Date(Date.parse(item.date)) >= new Date()) {
+                return "calendar_day-green"
+            }
+        }
+
+        return null
     }
 
     return (
         <div className={'calendar-menu'}>
-            <CalendarMonthIcon sx={{fontSize: 50}}/>
-            <div className='calendar-menu__calendar'>
-                <Calendar
-                    onChange={onChange}
-                    onClickDay={onClickDay}
-                    tileClassName={tileDayThisTask}
-                    value={value}
-                    locale={'ru-RU'}
-                />
-            </div>
+            <CalendarMonthIcon
+                className={'calendar-menu__icon'}
+                onClick={onOpenCalendarMenu}
+            />
+            {
+                isOpen &&
+                <div
+                    className='calendar-menu__calendar'
+                >
+                    <Calendar
+                        onChange={setValue}
+                        onClickDay={onClickDay}
+                        tileClassName={tileDayThisTask}
+                        value={value}
+                        locale={'ru-RU'}
+                    />
+                </div>
+            }
         </div>
     );
 }

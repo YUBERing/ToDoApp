@@ -12,7 +12,6 @@ import './style.scss';
 function ViewedTasksItemToDoList(props) {
     const {
         item,
-        className,
         onDeleteItem,
         onChangeItem,
         onCheck,
@@ -23,7 +22,7 @@ function ViewedTasksItemToDoList(props) {
     const date = new Date(Date.parse(item.date)).toLocaleDateString();
 
     return (
-        <div className={className}  key={item.id} style={style}>
+        <div className={'viewed-tasks__item-to-do-list'}  key={item.id} style={style}>
             <div className='viewed-tasks__to-do-task'>
                 <div className='viewed-tasks__headings' title={item.heading} onClick={() => onClick(item)}>
                     {item.heading}

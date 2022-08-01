@@ -4,7 +4,6 @@ import ModalWindow from '../ModalWindow';
 import Input from '../Input';
 import TextArea from '../TextArea';
 import DateAssign from '../DateAssign';
-import Button from '../Button';
 
 import { useTaskEditForm } from './hooks/useForm';
 
@@ -13,31 +12,33 @@ import './style.scss';
 function TaskEdit(props) {
     const {
         onClose,
-        onSubmit,
         data,
-        onModify,
         isDisabled,
+        isOpen,
+        setData,
+        setOpen,
     } = props;
 
     const {
         errorMessages,
         form,
         onChange,
-    } = useTaskEditForm({data});
+        getButton,
+    } = useTaskEditForm(data, isOpen, setOpen, setData, isDisabled);
+
+
 
     return (
         <ModalWindow
             onClose = {onClose}
             isDisabled={isDisabled}
         >
-            <form className={'task-edit'} noValidate={true}>
+            <form className={'task-edit'} onSubmit={(e) => {e.preventDefault()}}>
                 <Input
                     label={'Заголовок'}
                     value={form.heading}
                     name={'heading'}
-                    className={!errorMessages.heading
-                        ? 'input'
-                        : 'input input_invalid'}
+                    actionKey={'input-form'}
                     onChange={onChange}
                     errorMessage={errorMessages.heading}
                     isDisabled={isDisabled}
@@ -46,9 +47,7 @@ function TaskEdit(props) {
                     label={'Описание'}
                     value={form.description}
                     name={'description'}
-                    className={!errorMessages.description
-                        ? 'textarea'
-                        : 'textarea textarea_invalid'}
+                    actionKey={'textarea-form'}
                     onChange={onChange}
                     errorMessage={errorMessages.description}
                     isDisabled={isDisabled}
@@ -62,25 +61,7 @@ function TaskEdit(props) {
                         isDisabled={isDisabled}
                     />
                     {
-                        !data
-                        ? !isDisabled &&
-                            <Button
-                            label={'Добавить'}
-                            onClick={() => {onSubmit(form)}}
-                            className={!(errorMessages.heading || errorMessages.description)
-                            ? 'button_submit'
-                            : 'button_submit button_disabled'}
-                            disabled={(errorMessages.heading || errorMessages.description)}
-                        />
-                        : !isDisabled &&
-                            <Button
-                            label={'Изменить'}
-                            onClick={() => {onModify(form, data)}}
-                            className={!(errorMessages.heading || errorMessages.description)
-                            ? 'button_submit'
-                            : 'button_submit button_disabled'}
-                            disabled={(errorMessages.heading || errorMessages.description)}
-                        />
+                        getButton()
                     }
                 </div>
             </form>

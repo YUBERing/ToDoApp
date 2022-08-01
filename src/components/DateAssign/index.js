@@ -23,7 +23,11 @@ function DateAssign(props) {
                 ? onClick
                 : undefined
             }
-            className={'custom-input'}
+            className={`custom-input ${
+                isDisabled
+                ? 'custom-input_viewing-mod'
+                : ''
+            }` }
             ref={ref}
           >
               {value}
@@ -34,7 +38,6 @@ function DateAssign(props) {
         <div className='date-assign'>
             <Label
                 content={label}
-                className={'label'}
             />
             <DatePicker
                 dateFormat='dd.MM.yyyy'

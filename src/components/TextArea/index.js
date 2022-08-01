@@ -9,18 +9,30 @@ function TextArea(props){
         label,
         value,
         name,
-        className,
         onChange,
         onKeyPress,
         errorMessage,
         isDisabled,
+        actionKey,
     } = props;
 
+    const getClassName = (key) => {
+        switch(key) {
+            case 'textarea-form':
+                if (!errorMessage) {
+                    return ' textarea_form';
+                }
+
+                return ' textarea_form textarea_invalid';
+            default:
+                return '';
+        }
+    }
+
     return (
-        <div className={className}>
+        <div className={`textarea${getClassName(actionKey)}`}>
             <Label
                 content={label}
-                className={'label'}
             />
             <textarea
                 name={name}
@@ -31,7 +43,7 @@ function TextArea(props){
             />
             <Label
                 content={errorMessage}
-                className={'error-message'}
+                actionKey={'error-message'}
             />
         </div>
     )

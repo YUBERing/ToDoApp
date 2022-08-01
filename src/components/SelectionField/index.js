@@ -19,7 +19,6 @@ function SelectionField(props) {
                 <SelectionFieldCategory
                     key={item.id}
                     label={item.label}
-                    className={'selection-field__category'}
                     type={item.type}
                     isRegularPage={isRegularPage}
                 />

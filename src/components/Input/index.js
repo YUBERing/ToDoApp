@@ -9,18 +9,32 @@ function Input(props) {
         label,
         value,
         name,
-        className,
+        actionKey,
         onChange,
         onKeyPress,
         errorMessage,
         isDisabled,
     } = props;
 
+    const getClassName = (key) => {
+        switch(key) {
+            case 'search-bar':
+                return ' input_search-bar'
+            case 'input-form':
+                if (!errorMessage) {
+                    return ' input_form';
+                }
+
+                return ' input_form input_invalid';
+            default:
+                return '';
+        }
+    }
+
     return (
-        <div className={className}>
+        <div className={`input${getClassName(actionKey)}`}>
             <Label
                 content={label}
-                className={'label'}
             />
             <input
                 name={name}
@@ -32,7 +46,7 @@ function Input(props) {
             />
             <Label
                 content={errorMessage}
-                className={'error-message'}
+                actionKey={'error-message'}
             />
         </div>
     );

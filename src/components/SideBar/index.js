@@ -11,6 +11,7 @@ function SideBar(props) {
     const {
         onClick,
     } = props;
+
     const getLinksToPages = () => {
         return LINK_LIST.map((item) => {
             return (
@@ -31,7 +32,10 @@ function SideBar(props) {
     }
 
     return (
-        <div className='side-bar' onClick={(e) => e.stopPropagation()}>
+        <div
+            className='side-bar'
+            onClick={(e) => e.stopPropagation()}
+        >
             <div>ToDoAPP <CloseIcon onClick={onClick}/></div>
             <div className={'side-bar__navigation'}>
                 {getLinksToPages()}

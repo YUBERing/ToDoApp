@@ -5,6 +5,8 @@ import Header from "../Header";
 
 import {useTasksEditPage} from "../../hooks/usePage";
 
+import {history} from "../../store/store";
+
 import './style.scss'
 
 function FavoriteTasks() {
@@ -15,8 +17,12 @@ function FavoriteTasks() {
         setOpen,
         data,
         setData,
+        isViewing,
+        setViewing,
         onClick,
     } = useTasksEditPage(isRegularPage);
+
+    history.push('/favorite/ALL');
 
     return (
         <div className="favorite-tasks">
@@ -27,15 +33,17 @@ function FavoriteTasks() {
                 />
                 <ViewedTasks
                     isRegularPage={isRegularPage}
-                    isOpen={isOpen}
-                    setOpen={setOpen}
                     data={data}
                     setData={setData}
+                    isOpen={isOpen}
+                    setOpen={setOpen}
                     onClick={onClick}
+                    isViewing={isViewing}
+                    setViewing={setViewing}
                 />
             </div>
         </div>
     );
-};
+}
 
 export default FavoriteTasks;

@@ -27,7 +27,7 @@ function ViewedTasksPaginateList(props) {
         setCurrentItems(list.slice(itemOffset, endOffset));
 
         setPageCount(Math.ceil(list.length / itemsPerPage));
-    }, [itemOffset, itemsPerPage]);
+    }, [itemOffset, itemsPerPage, list]);
 
     const  handlePageClick = (event) => {
         const  newOffset = (event.selected * itemsPerPage) % list.length;

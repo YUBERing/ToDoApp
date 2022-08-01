@@ -4,6 +4,7 @@ import {Routes, Route} from "react-router-dom";
 import Tasks from './components/Tasks/index';
 import FavoriteTasks from "./components/FavoriteTasks";
 import SideBar from "./components/SideBar";
+import {PATHS_TO_PAGES} from "./constants/link";
 
 function App() {
   return (
@@ -11,11 +12,11 @@ function App() {
           <SideBar/>
           <Routes>
               <Route
-                  path='/'
+                  path={PATHS_TO_PAGES.MAIN}
                   element={<Tasks/>}
               />
               <Route
-                  path='/favorite'
+                  path={PATHS_TO_PAGES.FAVORITE}
                   element={<FavoriteTasks/>}
               />
           </Routes>
