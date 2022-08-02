@@ -23,8 +23,6 @@ function Tasks() {
       onClick,
   } = useTasksEditPage(isRegularPage);
 
-  history.push('/ALL');
-
   return (
     <div className="tasks">
       <div className='tasks__to-do-list'>
