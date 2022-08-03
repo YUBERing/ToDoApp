@@ -6,8 +6,8 @@ import StarIcon from '@mui/icons-material/Star';
 import {nanoid} from "nanoid";
 
 export const PATHS_TO_PAGES = {
-    MAIN: '/',
-    FAVORITE: '/favorite'
+    MAIN: '/tasks',
+    FAVORITE: '/favorite',
 }
 
 export const LINK_LIST = [

@@ -5,8 +5,6 @@ import Header from "../Header";
 
 import {useTasksEditPage} from "../../hooks/usePage";
 
-import {history} from "../../store/store";
-
 import './style.scss';
 import 'react-calendar/dist/Calendar.css';
 
@@ -22,8 +20,6 @@ function Tasks() {
       setViewing,
       onClick,
   } = useTasksEditPage(isRegularPage);
-
-  history.push('/ALL');
 
   return (
     <div className="tasks">
