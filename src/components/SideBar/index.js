@@ -17,7 +17,7 @@ function SideBar(props) {
             return (
                 <NavLink
                     key={item.id}
-                    to={item.link}
+                    to={`${item.link}`}
                     className={
                         ({isActive}) =>
                         isActive
