@@ -1,16 +1,14 @@
 import {React} from 'react';
 
-import {Routes, Route, useLocation} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
+import {Navigate} from "react-router";
 import Tasks from './components/Tasks/index';
 import FavoriteTasks from "./components/FavoriteTasks";
 import SideBar from "./components/SideBar";
-import {LINK_FAVORITE, LINK_TASKS} from "./constants/links";
-import {Navigate} from "react-router";
-import {CATEGORY_TYPE} from "./constants/tasks";
+
+import {LINK_FAVORITE, LINK_START_TASKS, LINK_TASKS} from "./constants/links";
 
 function App() {
-    const location = useLocation();
-
   return (
       <>
           <SideBar/>
@@ -20,8 +18,8 @@ function App() {
                   path={'/'}
                   element={
                       <Navigate
-                      to={LINK_TASKS.replace(':type', CATEGORY_TYPE.ALL)}
-                      replace={true}
+                        to={LINK_START_TASKS}
+                        replace={true}
                       />
                   }
               />
