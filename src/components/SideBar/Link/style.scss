@@ -1,0 +1,22 @@
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  min-height: 40px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+
+  svg {
+    margin-right: 10px;
+  }
+
+  &:not(:last-child){
+    margin-bottom: 20px;
+  }
+
+  &_active {
+    color: rgba(0, 0, 0, 1);
+    border-right: 5px solid #1f634a;
+  }
+}
+

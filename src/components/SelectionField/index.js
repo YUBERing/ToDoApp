@@ -15,11 +15,17 @@ function SelectionField(props) {
 
     const getCategories = () => {
         return CATEGORY_LIST.map((item, i) => {
+            const {
+                id,
+                label,
+                type,
+            } = item;
+
             return (
                 <SelectionFieldCategory
-                    key={item.id}
-                    label={item.label}
-                    type={item.type}
+                    key={id}
+                    label={label}
+                    type={type}
                     isRegularPage={isRegularPage}
                 />
             );
