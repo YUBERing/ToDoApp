@@ -1,19 +1,16 @@
 import React from "react";
 
-import {NavLink, useLocation} from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
+import ToDoLink from "./Link";
 
 import {LINK_LIST} from "../../constants/links";
 
 import './style.scss'
-import ToDoLink from "./Link";
 
 function SideBar(props) {
     const {
         onClick,
     } = props;
-
-    const location = useLocation();
 
     const getLinksToPages = () => {
         return LINK_LIST.map((item) => {
