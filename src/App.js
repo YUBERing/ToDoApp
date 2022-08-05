@@ -13,7 +13,12 @@ function App() {
   return (
       <>
           {
-              location.pathname === '/' || location.pathname === '/tasks'
+              location.pathname === '/'
+              &&
+              <Navigate to={'tasks/ALL'} replace={true}/>
+          }
+          {
+              location.pathname === '/tasks'
               &&
               <Navigate to={'tasks/ALL'} replace={true}/>
           }
