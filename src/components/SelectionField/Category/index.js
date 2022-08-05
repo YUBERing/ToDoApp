@@ -9,6 +9,7 @@ import {updateToDoList} from "../../../store/actionCreators/todos";
 import {CATEGORY_TYPE} from "../../../constants/tasks";
 
 import './style.scss';
+import {LINK_FAVORITE, LINK_TASKS} from "../../../constants/links";
 
 function SelectionFieldCategory(props) {
     const {
@@ -30,13 +31,17 @@ function SelectionFieldCategory(props) {
 
         const nowDay = new Date();
 
+        const link = isRegularPage
+            ? LINK_TASKS.replace(':type', type)
+            : LINK_FAVORITE.replace(':type', type);
+
         switch(type) {
             case CATEGORY_TYPE.ALL:
                 dispatch(updateToDoList(findTasksForPage(isRegularPage)));
-                navigate(`${ isRegularPage
-                    ? '../tasks/'
-                    : '../favorite/'
-                }${type}`, {replace: true})
+                navigate(
+                    link,
+                    {replace: true}
+                    )
                 break;
             case CATEGORY_TYPE.YESTERDAY:
                 const yesterday = new Date(nowDay.setDate(nowDay.getDate() - 1)).toLocaleDateString();
@@ -46,10 +51,10 @@ function SelectionFieldCategory(props) {
                 );
 
                 dispatch(updateToDoList(yesterdayTasks));
-                navigate(`${ isRegularPage
-                    ? '../tasks/'
-                    : '../favorite/'
-                }${type}`, {replace: true})
+                navigate(
+                    link,
+                    {replace: true}
+                    )
                 break;
             case CATEGORY_TYPE.TODAY:
                 const nowDayTasks = findTasksForPage(isRegularPage).filter(
@@ -57,10 +62,10 @@ function SelectionFieldCategory(props) {
                 );
 
                 dispatch(updateToDoList(nowDayTasks));
-                navigate(`${ isRegularPage
-                    ? '../tasks/'
-                    : '../favorite/'
-                }${type}`, {replace: true})
+                navigate(
+                    link,
+                    {replace: true}
+                    )
                 break;
             case CATEGORY_TYPE.FOR_MONTH:
                 const nowMonth = new Date().getMonth();
@@ -72,10 +77,10 @@ function SelectionFieldCategory(props) {
                 );
 
                 dispatch(updateToDoList(nowMonthTasks));
-                navigate(`${ isRegularPage
-                    ? '../tasks/'
-                    : '../favorite/'
-                }${type}`, {replace: true})
+                navigate(
+                    link,
+                    {replace: true}
+                    )
                 break;
             default:
                 break;

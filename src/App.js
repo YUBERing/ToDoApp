@@ -4,37 +4,33 @@ import {Routes, Route, useLocation} from "react-router-dom";
 import Tasks from './components/Tasks/index';
 import FavoriteTasks from "./components/FavoriteTasks";
 import SideBar from "./components/SideBar";
-import {PATHS_TO_PAGES} from "./constants/link";
+import {LINK_FAVORITE, LINK_TASKS} from "./constants/links";
 import {Navigate} from "react-router";
+import {CATEGORY_TYPE} from "./constants/tasks";
 
 function App() {
     const location = useLocation();
 
   return (
       <>
-          {
-              location.pathname === '/'
-              &&
-              <Navigate to={'tasks/ALL'} replace={true}/>
-          }
-          {
-              location.pathname === '/tasks'
-              &&
-              <Navigate to={'tasks/ALL'} replace={true}/>
-          }
-          {
-              location.pathname === '/favorite'
-              &&
-              <Navigate to={'favorite/ALL'} replace={true}/>
-          }
           <SideBar/>
           <Routes>
               <Route
-                  path={`${PATHS_TO_PAGES.MAIN}/:type`}
+                  exact
+                  path={'/'}
+                  element={
+                      <Navigate
+                      to={LINK_TASKS.replace(':type', CATEGORY_TYPE.ALL)}
+                      replace={true}
+                      />
+                  }
+              />
+              <Route
+                  path={LINK_TASKS}
                   element={<Tasks/>}
               />
               <Route
-                  path={`${PATHS_TO_PAGES.FAVORITE}/:type`}
+                  path={LINK_FAVORITE}
                   element={<FavoriteTasks/>}
               />
           </Routes>
