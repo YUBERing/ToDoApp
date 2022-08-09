@@ -42,6 +42,7 @@ function TaskEdit(props) {
                     onChange={onChange}
                     errorMessage={errorMessages.heading}
                     isDisabled={isDisabled}
+                    color={'green'}
                 />
                 <TextArea
                     label={'Описание'}
@@ -51,6 +52,7 @@ function TaskEdit(props) {
                     onChange={onChange}
                     errorMessage={errorMessages.description}
                     isDisabled={isDisabled}
+                    color={'green'}
                 />
                 <div className='task-edit__footer'>
                     <DateAssign

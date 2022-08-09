@@ -35,7 +35,7 @@ function SearchBar(props) {
 
     return (
             <Input
-                label={<SearchIcon/>}
+                icon={<SearchIcon/>}
                 value={text}
                 actionKey={'search-bar'}
                 onChange={setText}

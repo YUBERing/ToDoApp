@@ -25,7 +25,7 @@
   box-sizing: border-box;
   background-color: #dcf2ea;
   border-radius: 10px;
-  padding: 10px 0px 10px 10px;
+  padding: 10px 0 10px 10px;
   height: 100%;
   max-height: calc(100% - 200px);
 
@@ -60,25 +60,8 @@
   border-radius: 10px;
   padding: 6px 10px;
   height: 80px;
-  box-sizing: border-box;
 
   &:not(:last-child) {
     margin-bottom: 10px;
   }
 }
-
-.button_pagination {
-  border: 0px;
-  margin-bottom: 10px;
-  width: auto;
-  height: 30px;
-  background-color: #dcf2ea;
-  border-radius: 10px;
-  font-size: 20px;
-  color: #1f634a;
-}
-
-.button_active {
-  background-color: #76c4a8;
-}
-

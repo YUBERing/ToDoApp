@@ -1,7 +1,7 @@
 import React from "react";
+import {createPortal} from "react-dom";
 
 import "./style.scss"
-import {createPortal} from "react-dom";
 
 function Layer(props) {
     const {
