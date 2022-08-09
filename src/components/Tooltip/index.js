@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import './style.scss'
 
@@ -6,28 +6,46 @@ function Tooltip(props) {
     const {
         trigger,
         content,
-        tooltipRef,
     } = props;
 
+    const [isOpenHelp, setOpenHelp] = useState(false);
+
+    const tooltipRef = useRef(null);
+
+    const onOpenHelp = () => {
+        setOpenHelp(!isOpenHelp);
+    }
+
+    const onClickDocument = (event) => {
+        if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+            setOpenHelp(false);
+        }
+    }
+
     useEffect(() => {
-        document.addEventListener('click', (event) => {
-            if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
-                trigger();
-            }
-        });
+        document.addEventListener('click', onClickDocument);
 
         return () => {
-            document.removeEventListener('click', (event) => {
-                if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
-                    trigger();
-                }
-            });
+            document.removeEventListener('click', onClickDocument);
         }
     }, [tooltipRef])
 
     return(
-        <div onBlur={trigger} className={'tooltip'}>
-            {content}
+        <div className={'tooltip'} ref={tooltipRef}>
+            {
+                <div
+                    onClick={onOpenHelp}
+                    className={'tooltip__icon'}
+                >
+                    {trigger}
+                </div>
+            }
+            {
+                isOpenHelp &&
+                <div className={'tooltip__content'}>
+                    {content}
+                </div>
+            }
         </div>
     )
 }
