@@ -6,10 +6,10 @@ import Button from "../Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MenuIcon from '@mui/icons-material/Menu'
 import HelpIcon from '@mui/icons-material/Help';
-
-import './style.scss'
 import Layer from "../Layer";
 import Tooltip from "../Tooltip";
+
+import './style.scss'
 
 function Header(props){
     const {
@@ -18,8 +18,6 @@ function Header(props){
     } = props;
 
     const [isOpen, setOpen] = useState(false);
-
-
 
     const onOpenSideBar = () => {
         setOpen(!isOpen);

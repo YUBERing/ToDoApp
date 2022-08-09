@@ -1,13 +1,12 @@
-import {React, useState} from 'react';
+import {React} from 'react';
 
 import ModalWindowHeader from './Header/index';
+import Layer from "../Layer";
 
 import './style.scss';
-import Layer from "../Layer";
 
 function ModalWindow(props) {
     const {
-        name,
         onClose,
         children,
         isDisabled,
@@ -29,7 +28,5 @@ function ModalWindow(props) {
         </Layer>
     );
 }
-
-
 
 export default ModalWindow;

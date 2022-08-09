@@ -5,10 +5,10 @@ import Button from "../../Button";
 
 import {SIZE_LABEL} from "../constans/magicNumber";
 
-import {nanoid} from "nanoid";
 import {sortByDate} from "../../../utils/array";
-import {updateToDoList} from "../../../store/actionCreators/todos";
 
+import {nanoid} from "nanoid";
+import {updateToDoList} from "../../../store/actionCreators/todos";
 
 export const useTaskEditForm = (data, isOpen, setOpen, setData, isDisabled) => {
     const [errorMessages, setErrorMessages] = useState({
@@ -38,10 +38,6 @@ export const useTaskEditForm = (data, isOpen, setOpen, setData, isDisabled) => {
 
         setForm(task);
     }, []);
-
-    useEffect(() => {
-        console.log(errorMessages)
-    }, [errorMessages])
 
     const dispatch = useDispatch();
 
@@ -152,7 +148,6 @@ export const useTaskEditForm = (data, isOpen, setOpen, setData, isDisabled) => {
     }
 
     const getButton = () => {
-        console.log(data);
         if (!data) {
             return (
                 <Button

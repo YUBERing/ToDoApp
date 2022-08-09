@@ -36,9 +36,11 @@ function DateAssign(props) {
 
     return (
         <div className='date-assign'>
-            <Label
-                content={label}
-            />
+            {label &&
+                <Label
+                    content={label}
+                />
+            }
             <DatePicker
                 dateFormat='dd.MM.yyyy'
                 selected={Date.parse(value)}
